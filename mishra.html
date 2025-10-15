@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+  <title>Hostel Complaint Register</title>
+  <style>
+    body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #001f3f, #003366);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+    h1 {
+  margin-top: 30px;
+  font-size: 2.3em;
+  color: #00bfff;
+  letter-spacing: 1px;
+  text-align: center;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff; }
+  to { text-shadow: 0 0 15px #00ffff, 0 0 30px #00bfff; }
+}
+
+    .intro {
+      max-width: 900px;
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.6;
+      font-size: 1em;
+      color: #e0e0e0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 950px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      margin-top: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1em;
+    }
+
+    button {
+      background: #00bfff;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #009acd;
+    }
+
+    .complaint-list {
+      margin-top: 20px;
+    }
+
+    .complaint-card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .complaint-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .status {
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .Pending { background: #ffcc00; color: #000; }
+    .InProgress { background: #1e90ff; }
+    .Resolved { background: #32cd32; }
+
+    @media(max-width:600px){
+      .container { padding: 15px; }
+      h1 { font-size: 1.8em; }
+    }
+
+    footer {
+  background: #0056b3;
+  color: white;
+  text-align: center;
+  padding: 15px 10px;
+  border-radius: 10px;
+  margin-top: 30px;
+  font-size: 14px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+
+@media(max-width: 480px) {
+  input, select, textarea, button {
+    font-size: 0.9em;
+  }
+  .complaint-card {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+  footer {
+    font-size: 12px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <h1>Hostel Complaint Register</h1>
+  <p class="intro">
+    Welcome to the Hostel Complaint Management System. This platform allows hostel residents to easily report maintenance, electrical, plumbing, or hygiene-related issues. 
+    Every complaint is recorded and tracked for a transparent and efficient resolution process. Please fill out the form below to submit your issue.
+  </p>
+
+<input type="text" id="search" placeholder="Search complaint by name or room..." style="margin-top:15px; padding:10px; width:80%; border-radius:8px; border:none; outline:none;">
+
+
+  <div class="container">
+    <form id="complaintForm">
+      <input type="text" id="name" placeholder="Enter your name" required />
+      <input type="text" id="room" placeholder="Room number" required />
+      <select id="issueType" required>
+        <option value="">Select issue type</option>
+        <option value="Electrical">Electrical</option>
+        <option value="Plumbing">Plumbing</option>
+        <option value="WiFi">Wi-Fi</option>
+        <option value="Structural">Structural</option>
+        <option value="Cleanliness">Cleanliness</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Security">Security</option>
+        <option value="Other">Other</option>
+      </select>
+      <textarea id="description" rows="3" placeholder="Describe the issue" required></textarea>
+      <button type="submit">Submit Complaint</button>
+    </form>
+
+    <div class="complaint-list" id="complaintList"></div>
+  </div>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>©️ 2025 Hostel Complaint Register — Developed by <strong>SHIVANSHU K., UTKARSH P. & SHIKHA M.</strong></p>
+    <p>📍 Department of Computer Science & Engineering | <strong>BANSAL INSTITUTE OF ENGINEERING AND TECHNOLOGY</strong></p>
+  </footer>
+
+  <script>
+    const complaintForm = document.getElementById('complaintForm');
+    const complaintList = document.getElementById('complaintList');
+
+    let complaints = JSON.parse(localStorage.getItem('complaints')) || [
+      { name: 'Shivanshu Kaushal', room: 'A-199', issueType: 'Electrical', description: 'Fan not working properly.', status: 'Pending' },
+      { name: 'Utkarsh Pandey', room: 'B-210', issueType: 'Structural', description: 'Wall cracked and needs repair.', status: 'InProgress' },
+      { name: 'Shikha Mishra', room: 'C-191', issueType: 'Maintenance', description: 'Room condition not good, needs cleaning.', status: 'Pending' },
+      { name: 'Shivanshu Kaushal', room: 'A-198', issueType: 'Plumbing', description: 'Bathroom tap leaking continuously.', status: 'Pending' },
+      { name: 'Utkarsh Pandey', room: 'B-210', issueType: 'WiFi', description: 'Wi-Fi not connecting in the evening.', status: 'InProgress' },
+      { name: 'Shikha Mishra', room: 'C-191', issueType: 'Furniture', description: 'Study table drawer broken.', status: 'Pending' },
+      { name: 'Shivanhu Kaushal', room: 'A-198', issueType: 'Cleanliness', description: 'Corridor not cleaned for two days.', status: 'Pending' },
+      { name: 'Utkarsh Pandey', room: 'B-210', issueType: 'Security', description: 'Main gate lights not working properly at night.', status: 'InProgress' },
+
+      /* Added Complaints */
+      { name: 'Shivanshu Kaushal', room: 'A-198', issueType: 'Electrical', description: 'The fan is broken.', status: 'Pending' },
+      { name: 'Utkarsh Pandey', room: 'B-210', issueType: 'WiFi', description: "The Wi-Fi isn't working properly.", status: 'Pending' },
+      { name: 'Shikha Mishra ', room: 'C-191', issueType: 'Cleanliness', description: 'The room is not clean.', status: 'Pending' },
+      { name: 'Shivanshu Kaushal', room: 'A-198', issueType: 'Electrical', description: 'The lights are too dim.', status: 'Pending' },
+      { name: 'Utkarsh Pandey', room: 'B-210', issueType: 'Structural', description: 'The wall is broken.', status: 'Pending' },
+      { name: 'Shikha Mishra', room: 'C-191', issueType: 'Plumbing', description: 'The water does not come out clean.', status: 'Pending' }
+    ];
+
+    function displayComplaints() {
+      complaintList.innerHTML = '';
+      complaints.forEach((c, index) => {
+        const card = document.createElement('div');
+        card.className = 'complaint-card';
+        card.innerHTML = `
+          <div class="complaint-header">
+            <h3>${c.issueType}</h3>
+            <span class="status ${c.status.replace(' ', '')}">${c.status}</span>
+          </div>
+          <p><strong>Name:</strong> ${c.name}</p>
+          <p><strong>Room:</strong> ${c.room}</p>
+          <p><strong>Description:</strong> ${c.description}</p>
+          <div>
+            <button onclick="updateStatus(${index}, 'Pending')">Pending</button>
+            <button onclick="updateStatus(${index}, 'InProgress')">In Progress</button>
+            <button onclick="updateStatus(${index}, 'Resolved')">Resolved</button>
+            <button onclick="deleteComplaint(${index})">Delete</button>
+          </div>
+        `
+        complaintList.appendChild(card);
+      });
+      localStorage.setItem('complaints', JSON.stringify(complaints));
+    }
+
+    function updateStatus(index, newStatus) {
+      complaints[index].status = newStatus;
+      displayComplaints();
+    }
+
+    function deleteComplaint(index) {
+      complaints.splice(index, 1);
+      displayComplaints();
+    }
+
+    complaintForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const room = document.getElementById('room').value;
+      const issueType = document.getElementById('issueType').value;
+      const description = document.getElementById('description').value;
+
+      complaints.push({ name, room, issueType, description, status: 'Pending' });
+      localStorage.setItem('complaints', JSON.stringify(complaints));
+      complaintForm.reset();
+      displayComplaints();
+      showToast("✅ Complaint Submitted Successfully!");
+
+    });
+
+    displayComplaints();
+
+
+    function showToast(message) {
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.style.position = 'fixed';
+  toast.style.bottom = '30px';
+  toast.style.left = '50%';
+  toast.style.transform = 'translateX(-50%)';
+  toast.style.background = '#00bfff';
+  toast.style.color = '#fff';
+  toast.style.padding = '10px 20px';
+  toast.style.borderRadius = '8px';
+  toast.style.fontWeight = '600';
+  toast.style.zIndex = '1000';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
+
+//new
+
+document.getElementById('search').addEventListener('input', e => {
+  const term = e.target.value.toLowerCase();
+  const filtered = complaints.filter(c =>
+    c.name.toLowerCase().includes(term) || c.room.toLowerCase().includes(term)
+  );
+  displayFilteredComplaints(filtered);
+});
+
+function displayFilteredComplaints(list) {
+  complaintList.innerHTML = '';
+  list.forEach((c, index) => {
+    const card = document.createElement('div');
+    card.className = 'complaint-card';
+    card.innerHTML = `
+      <div class="complaint-header">
+        <h3>${c.issueType}</h3>
+        <span class="status ${c.status.replace(' ', '')}">${c.status}</span>
+      </div>
+      <p><strong>Name:</strong> ${c.name}</p>
+      <p><strong>Room:</strong> ${c.room}</p>
+      <p><strong>Description:</strong> ${c.description}</p>
+    `;
+    complaintList.appendChild(card);
+  });
+}
+
+
+  </script>
+</body>
+</html>
